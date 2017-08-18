@@ -7,7 +7,8 @@ const filenamify = require('filenamify');
 
 const logger = require('./logger');
 
-async function exportUser(options) {
+async function exportData(options) {
+
     const {
         url,
         email,
@@ -16,8 +17,6 @@ async function exportUser(options) {
     } = options;
 
     const outDir = path.resolve(out);
-    const userDir = path.join(outDir, email);
-    await fs.ensureDir(userDir);
 
     // todo get latest run time to create from argument
 
@@ -79,5 +78,5 @@ async function exportUser(options) {
 }
 
 module.exports = {
-    exportUser
+    exportData
 };
