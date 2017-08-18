@@ -1,6 +1,6 @@
 {
   "name": "rest-on-couch-export",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Export entries and attachments from a rest-on-couch instance",
   "main": "src/index.js",
   "files": [
