@@ -8,7 +8,6 @@ const filenamify = require('filenamify');
 const logger = require('./logger');
 
 async function exportData(options) {
-
     const {
         url,
         email,
@@ -16,21 +15,43 @@ async function exportData(options) {
         out
     } = options;
 
+    const type = email ? 'user' : 'all';
+
     const outDir = path.resolve(out);
+    const jsonPath = path.join(outDir, 'roc-export.json');
 
-    // todo get latest run time to create from argument
+    let json;
+    try {
+        const jsonData = await fs.readFile(jsonPath, 'utf8');
+        json = JSON.parse(jsonData);
+    } catch (e) {
+        if (e.code === 'ENOENT') {
+            json = {
+                type,
+                email,
+                last: 0
+            };
+        } else {
+            throw e;
+        }
+    }
 
-    const uuids = await req('/entry/_all', {
+    if (json.type !== type || (type === 'user' && json.email !== email)) {
+        throw new Error('Cannot mix different exports in the same directory');
+    }
+
+    const entries = await req('/entry/_all', {
         qs: {
             owner: email,
             includeDocs: false,
-            from: 0
+            includeDate: true,
+            from: json.last
         }
     });
 
-    logger.info(`${uuids.length} entries to export`);
+    logger.info(`${entries.length} entries to export`);
 
-    for (const uuid of uuids) { // todo remove slice
+    for (const {id: uuid, date} of entries) {
         logger.info(`exporting entry ${uuid}`);
         const entry = await req(`/entry/${uuid}`);
 
@@ -59,6 +80,9 @@ async function exportData(options) {
                 await downloadFile(`/entry/${uuid}/${attachment}`, attachmentPath);
             }
         }
+
+        json.last = date;
+        await fs.outputJson(jsonPath, json, {spaces: 2});
     }
 
     function req(path, options) {
