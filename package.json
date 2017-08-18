@@ -1,0 +1,40 @@
+{
+  "name": "rest-on-couch-export",
+  "version": "0.0.0",
+  "description": "Export entries and attachments from a rest-on-couch instance",
+  "main": "src/index.js",
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "eslint": "eslint src",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "run-s eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheminfo/rest-on-couch-export.git"
+  },
+  "keywords": [],
+  "author": "Michaël Zasso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cheminfo/rest-on-couch-export/issues"
+  },
+  "homepage": "https://github.com/cheminfo/rest-on-couch-export#readme",
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-cheminfo": "^1.8.0",
+    "eslint-plugin-no-only-tests": "^2.0.0",
+    "npm-run-all": "^4.0.2"
+  },
+  "dependencies": {
+    "filenamify": "^2.0.0",
+    "fs-extra": "^4.0.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "winston": "^2.3.1",
+    "yargs": "^8.0.2"
+  }
+}
