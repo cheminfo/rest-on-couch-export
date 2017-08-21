@@ -58,11 +58,15 @@ async function exportData(options) {
         let dataPath = uuid;
         if (entry.$id) {
             if (Array.isArray(entry.$id)) {
-                dataPath = entry.$id.map(filenamify).join('/');
+                dataPath = entry.$id.filter(x => !!x).map(filenamify).join('/');
             } else {
                 dataPath = filenamify(String(entry.$id));
             }
         }
+        if (dataPath === '') {
+            dataPath = uuid;
+        }
+
         dataPath = path.join(outDir, entry.$owners[0], dataPath);
 
         // save raw JSON
