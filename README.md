@@ -21,7 +21,7 @@ Export entries and attachments from a rest-on-couch instance.
 
 URL to the rest-on-couch database.
 
-#### `-o, --out'
+#### `-o, --out`
 
 Output directory
 
@@ -31,7 +31,7 @@ User token to access private data
 
 ## Example
 
-rest-on-couch-export all -u "http://localhost/roc/db/eln" -t "your token here" -o /tmp/export
+`rest-on-couch-export all -u "http://localhost/roc/db/eln" -t "your token here" -o /tmp/export`
 
 ## License
 
