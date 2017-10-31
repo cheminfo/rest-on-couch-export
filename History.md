@@ -1,3 +1,13 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/cheminfo/rest-on-couch-export/compare/v0.2.2...v0.2.3) (2017-10-31)
+
+
+### Bug Fixes
+
+* add $kind to file path ([070d9df](https://github.com/cheminfo/rest-on-couch-export/commit/070d9df))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/cheminfo/rest-on-couch-export/compare/v0.2.1...v0.2.2) (2017-08-21)
 
