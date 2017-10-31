@@ -49,6 +49,10 @@ async function exportData(options) {
         }
     });
 
+    if (!Array.isArray(entries)) {
+        throw new Error(`Error getting entries. Please check the URL option: ${url}`);
+    }
+
     logger.info(`${entries.length} entries to export`);
 
     for (const {id: uuid, date} of entries) {
@@ -67,7 +71,7 @@ async function exportData(options) {
             dataPath = uuid;
         }
 
-        dataPath = path.join(outDir, entry.$owners[0], dataPath);
+        dataPath = path.join(outDir, entry.$owners[0], entry.$kind || '', dataPath);
 
         // save raw JSON
         logger.debug('saving index.json');
