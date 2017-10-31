@@ -15,6 +15,12 @@ async function exportData(options) {
         out
     } = options;
 
+    let shouldExit = false;
+    process.on('SIGINT', () => {
+        logger.warn('Process will exit after current export');
+        shouldExit = true;
+    });
+
     const type = email ? 'user' : 'all';
 
     const outDir = path.resolve(out);
@@ -91,6 +97,10 @@ async function exportData(options) {
 
         json.last = date;
         await fs.outputJson(jsonPath, json, {spaces: 2});
+
+        if (shouldExit) {
+            return;
+        }
     }
 
     function req(path, options) {
