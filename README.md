@@ -13,7 +13,7 @@ Export entries and attachments from a rest-on-couch instance.
 
 ### Export a single user
 
-`rest-on-couch-export user <email> options`
+`rest-on-couch-export user <email> | all options`
 
 ### Options
 
@@ -28,6 +28,10 @@ Output directory
 #### `-t, --token`
 
 User token to access private data
+
+## Example
+
+rest-on-couch-export all -u "http://localhost/roc/db/eln" -t "your token here" -o /tmp/export
 
 ## License
 
